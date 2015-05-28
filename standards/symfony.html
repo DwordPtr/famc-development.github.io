@@ -32,7 +32,147 @@
         <ul></ul>
       </nav>
       <section>
-        <h3><a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Symfony Standards.</h3>
+        <h2><a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Symfony Standards</h2>
+
+        <h3>Bundles</h3>
+
+        <h4>Bundle Structure</h4>
+
+        <ul>
+          <li><strong>/Command</strong> - Symfony command-line tasks<br></li>
+          <li><strong>/Component</strong> - Generally used for Interfaces, and abstract classes which services can extended/inherited; Generic Traits; It should contain subfolders<br></li>
+          <li><strong>/Controller</strong>* – Controllers should have a small amount of actions and the actions themselves should not be large<br></li>
+          <li><strong>/DBAL/Types</strong> - Custom DBAL Types<br></li>
+          <li><strong>/DependencyInjection</strong>* – It consists primarily of the bundle configuration, occasionally CompilerPass.<br></li>
+          <li><strong>/Document</strong> – model classes managed by the ODM and their repositories.<br></li>
+          <li><strong>/Entity</strong> – model classes managed by an ORM model and their repositories.<br></li>
+          <li><strong>/Event</strong> – event classes.<br></li>
+          <li><strong>/EventListener</strong> – Listeners / Subscribers. It can contain subfolders, e.g. for Doctrine or Form listeners, etc. You would usually see a reversed directory structure. In other libraries Form/EventListener is more common than EventListener/Form. I’d recommend the latter in order to avoid spreading the EventListener directory within a single bundle. This also goes hand in hand with the guidelines, which refer to a small amount of directories and their generic nature.<br></li>
+          <li><strong>/Form</strong> – form related class. It contains subfolders, in particular Form/Type and Form/DataTransformer.<br></li>
+          <li><strong>/Model</strong> – model classes that are not managed by ORM/ODM.<br></li>
+          <li><strong>/Resources</strong>* – bundle specific resources e.g. translations, documentation, service config<br></li>
+          <li><strong>/Service</strong> – Service classes which are domain specific to the bundle which are not listeners and do not match other folders. It may contain subfolders.<br></li>
+          <li><strong>/Tests</strong> – The folder structure corresponds to the structure of the folders in the bundle, so if you want to test a class located in the Service/MyService.php, put the test case in the file Tests/Service/MyServiceTest.php.<br></li>
+          <li><strong>/Twig/Extensions</strong> – Classes that are extensions for Twig. It is placed here mainly as an example of the 2nd case in step 3 of the guidelines.<br></li>
+          <li><strong>/Validator</strong> – validators.<br></li>
+          <li><strong>Events.php</strong> – final class containing constants with the names of the events defined in the bundle.<br></li>
+        </ul>
+
+        <p>* - Standard symfony folder </p>
+
+        <h4>Documentation</h4>
+
+        <p>Each bundle should contain a <strong>Resources/doc</strong> folder. In that folder should,
+          at minimum include a README file with a description of the bundle - the more
+          detailed the better.  Documentation should be written in
+          <a href="http://daringfireball.net/projects/markdown/syntax">markdown</a>. </p>
+
+        <h5>Boilerplate README.md</h5>
+
+<pre><code>
+  # Bundle Name
+
+  ## Description (or Purpose)
+
+  ## Services
+
+  ## Notes
+</code></pre>
+
+        <h3>Doctrine</h3>
+
+        <h4>Flush</h4>
+
+        <p>The flush method should only be executed from a Controller or a Command [-line task].</p>
+
+        <h3>Entity</h3>
+
+        <p>Entity should be ProudCamelCased while members on entities should be
+          headLessCamelCased. Every entity should have a populated Table Annotation with
+          the table name defined. Table names should be all lower case and singular.
+          Spaces should be replaced by an underscore.<br>
+          Example: </p>
+
+<pre><code>/**
+  * @ORM\Entity
+  * @ORM\Table(&quot;application_group&quot;)
+  */
+  class ApplicationGroup {
+
+  /**
+  * @var string $createdBy
+  *
+  * @ORM\Column(name=&quot;created_by&quot;, type=&quot;string&quot;, length=255)
+  */
+  private $createdBy;
+
+  ...
+  }
+</code></pre>
+
+        <h3>Routing</h3>
+
+        <h4>Controllers</h4>
+
+        <p>Controllers should be organized by a common element with a class level Route
+          annotation with a defined slug referencing the common element. Each action
+          would then have a user-friendly slug. For example, a Product, CRUD (Create,
+          Read, Update, Delete) operations should fall under a ProductController where
+          all actions will start with /product. Actions would be &quot;/&quot; for an index or
+          &quot;/edit/{slug}&quot; for the edit action.</p>
+
+        <h4>Names</h4>
+
+        <p>Route names for individual actions should follow, where allowable, the
+          convention of &quot;subject<em>verb.&quot; In the example above, the name of the edit
+            product action would be &quot;product</em>edit&quot; and the index would be &quot;product_index.&quot;</p>
+
+        <h3>Service</h3>
+
+        <p>The service should not include the word Service suffixed to the class name.
+          Within the service container, the service should include the vender and the
+          bundle in the name. Services categorized into a subfolder/namespace should also
+          include the subfolder/namespace.</p>
+
+<pre><code>class: FAMC\CiDeployment\ConductorBundle\Service\Deployment
+  service: famc.conductor.deployment
+
+  class: FAMC\CiDeployment\ConductorBundle\Service\Git\Stash
+  service: famc.conductor.git.stash
+</code></pre>
+
+        <p>Service arguments and method calls should be listed on individual lines to ease
+          readablility and modification.</p>
+
+<pre><code>class: FAMC\CiDeployment\ConductorBundle\Service\Deployment
+  service: famc.conductor.deployment
+  arguments:
+  - &#39;@famc.conductor.stash&#39;
+  - &#39;@famc.jenkins.spinup.project&#39;
+  calls:
+  - [ setContainer, [ &quot;@service_container&quot; ]]
+  - [ setTimeout, [ &quot;%famc.conductor.deployment.timeout%&quot; ]]
+</code></pre>
+
+        <h4>Utility Classes</h4>
+
+        <p>Utility classes are simply singleton service classes. They have static methods
+          and are &quot;dumb.&quot; Utility class names should end in &quot;Util.&quot; They require no
+          instantiation and generally perform simple tasks much like data transformation
+          that is reusable. An example might be an array reduction. You would see them
+          called like so:  </p>
+
+<pre><code>$gridData = PricingGridUtil::reduceDataSet($fullPricingGridData);
+</code></pre>
+
+        <h3>Traits</h3>
+
+        <p>Trait files should live in places where it makes sense for them to be. If a
+          trait is used for multiple services then the trait should live in the
+          <strong>Service</strong> folder, if it is used exclusively by an entity then it should reside
+          in the <strong>Entity</strong> folder. Generic or does not belong to a specific type of class
+          then the traits should be housed in the <strong>Component</strong> folder.</p>
+
       </section>
     </div>
 </body>
