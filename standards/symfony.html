@@ -34,11 +34,11 @@
         </ul>
       </nav>
       <section>
-        <h2><a id="symfony-standards" class="anchor" href="#symfony-standards" aria-hidden="true"><span class="octicon octicon-link"></span></a>Symfony Standards</h2>
+        <h1><a id="symfony-standards" class="anchor" href="#symfony-standards" aria-hidden="true"><span class="octicon octicon-link"></span></a>Symfony Standards</h1>
 
-        <h3>Bundles</h3>
+        <h2>Bundles</h2>
 
-        <h4>Bundle Structure</h4>
+        <h3>Bundle Structure</h3>
 
         <ul>
           <li><strong>/Command</strong> - Symfony command-line tasks<br></li>
@@ -62,14 +62,14 @@
 
         <p>* - Standard symfony folder </p>
 
-        <h4>Documentation</h4>
+        <h3>Documentation</h3>
 
         <p>Each bundle should contain a <strong>Resources/doc</strong> folder. In that folder should,
           at minimum include a README file with a description of the bundle - the more
           detailed the better.  Documentation should be written in
           <a href="http://daringfireball.net/projects/markdown/syntax">markdown</a>. </p>
 
-        <h5>Boilerplate README.md</h5>
+        <h4>Boilerplate README.md</h4>
 
 <pre><code>
   # Bundle Name
@@ -81,13 +81,13 @@
   ## Notes
 </code></pre>
 
-        <h3>Doctrine</h3>
+        <h2>Doctrine</h2>
 
-        <h4>Flush</h4>
+        <h3>Flush</h3>
 
         <p>The flush method should only be executed from a Controller or a Command [-line task].</p>
 
-        <h3>Entity</h3>
+        <h2>Entity</h2>
 
         <p>Entity should be ProudCamelCased while members on entities should be
           headLessCamelCased. Every entity should have a populated Table Annotation with
@@ -112,9 +112,9 @@
   }
 </code></pre>
 
-        <h3>Routing</h3>
+        <h2>Routing</h2>
 
-        <h4>Controllers</h4>
+        <h3>Controllers</h3>
 
         <p>Controllers should be organized by a common element with a class level Route
           annotation with a defined slug referencing the common element. Each action
@@ -123,13 +123,13 @@
           all actions will start with /product. Actions would be &quot;/&quot; for an index or
           &quot;/edit/{slug}&quot; for the edit action.</p>
 
-        <h4>Names</h4>
+        <h3>Names</h3>
 
         <p>Route names for individual actions should follow, where allowable, the
           convention of &quot;subject<em>verb.&quot; In the example above, the name of the edit
             product action would be &quot;product</em>edit&quot; and the index would be &quot;product_index.&quot;</p>
 
-        <h3>Service</h3>
+        <h2>Service</h2>
 
         <p>The service should not include the word Service suffixed to the class name.
           Within the service container, the service should include the vender and the
@@ -156,7 +156,7 @@
   - [ setTimeout, [ &quot;%famc.conductor.deployment.timeout%&quot; ]]
 </code></pre>
 
-        <h4>Utility Classes</h4>
+        <h3>Utility Classes</h3>
 
         <p>Utility classes are simply singleton service classes. They have static methods
           and are &quot;dumb.&quot; Utility class names should end in &quot;Util.&quot; They require no
@@ -167,7 +167,7 @@
 <pre><code>$gridData = PricingGridUtil::reduceDataSet($fullPricingGridData);
 </code></pre>
 
-        <h3>Traits</h3>
+        <h2>Traits</h2>
 
         <p>Trait files should live in places where it makes sense for them to be. If a
           trait is used for multiple services then the trait should live in the
