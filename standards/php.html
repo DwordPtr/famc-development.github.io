@@ -4,10 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>FAMC Development by FAMC-Development</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <link rel="stylesheet" href="../stylesheets/styles.css">
+    <link rel="stylesheet" href="../stylesheets/github-dark.css">
+    <link rel="stylesheet" href="../stylesheets/php.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/main.js"></script>
+    <script src="../javascripts/main.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -29,11 +30,344 @@
 
     <div class="wrapper">
       <nav>
-        <ul></ul>
+        <ul>
+          <a href="/" aria-hidden="true"><span class="octicon octicon-link"></span>Home</a>
+        </ul>
       </nav>
       <section>
-        <h3><a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>PHP Coding Standards.</h3>
+        <h2><a id="php-coding-standards" class="anchor" href="#php-coding-standards" aria-hidden="true"><span class="octicon octicon-link"></span></a>PHP Coding Standards.</h2>
+        <h2>Framework(s)</h2>
+
+        <p>The use of frameworks on FAMC PHP projects should be evaluated on a case-by-case the accepted standard choices are
+          Symfony.  </p>
+
+        <h2>Coding Style</h2>
+
+        <p>FAMC PHP Coding Styles should strictly adhere to PHP-FIG (PHP Framework Interoperability Group) standards outlined
+          in all accepted PSRs. The <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md">PSR-1 Basic Coding Standards</a> and <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md">PSR-2 Coding Style Guide</a> specifically
+          address coding styles while <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md">PSR-0</a> address autoloading, namespacing and class naming (namespacing and class
+          naming are likewise covered under PSR-1).  </p>
+
+        <h3>Classes</h3>
+
+        <p>PHP classes must use the long &quot;<em>&lt;?PHP</em>&quot; tag followed by a blank line. When present, namespace delcaration MUST follow
+          the opening PHP tag and there MUST be one blank line after the namespace declaration.  All use declarations MUST go
+          after the namespace declaration and having one use keyword per declaration.  There MUST be one blank line after the use
+          block.<br>
+          Classes should not have a closing &quot;<em>?&gt;</em>&quot; tag.<br>
+          Only one class is allowed per file.   </p>
+
+        <p>Never use short tags: <em>&lt;? .. ?&gt;</em>. Short tags should be turned off in php.ini.</p>
+
+        <h4>File Structure</h4>
+
+        <p>The opening PHP ( &lt;?PHP )tag should ALWAYS begin the file on <em>line 1</em>. Followed
+          by a blank line a namespace declaration, if applicable, should always be on
+          <em>line 3</em> and be followed by a blank line. Any <strong>use</strong> statements required should
+          then always begin on <em>line 5</em> and be followed by a blank line. Class level PHPDoc
+          should then begin on the <strong><em>next line</em></strong> and be followed <strong><em>immediately</em></strong> by the class
+          declaration.</p>
+
+        <h4>Class Names</h4>
+
+        <p>Class names are to be declared in StudlyCaps (or ProudCamelCase). All classes written for PHP 5.3 and above should use
+          namespaces. Classes written in 5.2 should follow pseudo-namespacing conventions outlined in PSR-1.  </p>
+
+        <h4>Class Members</h4>
+
+        <p>ALL class members (properties and methods) should be first grouped by type putting constants first, followed by
+          properties, then methods, then ordered by access modifier (public, protected then private) and last ordered by
+          alphabetical order.   </p>
+
+        <h5>Constants</h5>
+
+        <p><strong>Constants</strong> MUST be declared in upper case with underscore separators.</p>
+
+        <h5>Static variables</h5>
+
+        <p><strong>Static</strong> variables MUST be declared in upper case with underscore separators.</p>
+
+        <h5>Properties</h5>
+
+        <p>All properties should be declared as a <em>descriptive</em> variable name. Properties that are not constant nor static should
+          be in <strong>camelCase</strong>. </p>
+
+        <h5>Methods/Functions</h5>
+
+        <p>Methods or Functions must be declared in <strong>camelCase</strong>.  </p>
+
+        <p>Manipulation functions, functions which only modify the object and would normally be a void return should return the
+          object to assist in method chaining -- unless the scope of the project prevents this.</p>
+
+        <h3>Traits</h3>
+
+        <p>Beginning with PHP 5.4 traits became an available language feature. Trait code should comply with coding standards
+          classes except where noted below.</p>
+
+        <h4>Trait Names</h4>
+
+        <p>Trait names, just as classes, are to be declared in StudlyCaps ( or ProudCamelCase). All
+          trait names should end with Trait for quick identification and distinction from other classes (e.g. WidgetTrait).</p>
+
+        <h3>Control Structure</h3>
+
+        <h4>Spaces After Keywords</h4>
+
+        <p>Control structure keywords (if, for, foreach, etc) should be followed by a space. This means a space should between the
+          <strong>if</strong> and the opening parenthesis. This does <strong>NOT</strong> include method calls.  </p>
+
+        <h5>Example:</h5>
+
+        <ul>
+          <li>GOOD: if (true) { ... }</li>
+          <li>BAD:  if(true) { ... }</li>
+          <li>GOOD: makeCoffee(&#39;sumatra&#39;);</li>
+          <li>BAD:  makeCoffee (&#39;sumatra&#39;);</li>
+        </ul>
+
+        <h4>Curly Braces</h4>
+
+        <p>Curly braces should be on a new line for class and method declarations. Control stucture should be Egyptian Style
+          (existing on the same line as the statement). Curly braces should always be included on if blocks regardless of line
+          count - one line if statements should still include curly braces.</p>
+
+        <p><strong>GOOD</strong>
+          if (true) {
+          // ...
+          }</p>
+
+<pre><code>if (true) {
+  // ...
+  } else {
+  // ...
+  }
+</code></pre>
+
+        <p><strong>BAD</strong>
+          if (true)
+          // ...</p>
+
+<pre><code>if (true)
+  // ...
+  else
+  // ...
+</code></pre>
+
+        <h3>Doc Blocks</h3>
+
+        <p>Document everything. Follow proper PHPDoc standards (located: [http://www.phpdoc.org/])  PHPDoc blocks should exist
+          just above the member or method they are describing. The Doc Block should include a brief but accurate description of the method,
+          any arugments accepted, and if applicable what is returned.</p>
+
+        <h3>Namespaces</h3>
+
+        <p>All FAMC classes should fall under the top-level namespace of <strong>FAMC</strong>. The second level should be project name or
+          codename. All levels of namespaces should be in StudlyCaps (or ProudCamelCase).  In the interest maintaining PSR-0
+          and PSR-4 compliance packages should have a minimum of two levels of namespacing, a vendor level namespace (FAMC)
+          and project (Blackbird), see example below. Maintaining separate namespaces allows for generic FAMC packages to be
+          added via Composer and properly autoloaded.</p>
+
+<pre><code>\FAMC\Blackbird
+</code></pre>
+
+        <h3>Misc</h3>
+
+        <h4>Alignment</h4>
+
+        <p>Pretty code is easy to read. Repetitive code spanning multiple lines should be aligned, this includes class property
+          declarations, assignment opperations, or array member population. Property declarations should be aligned on name while
+          assignment should align on equals and array member population should align on rockets.  </p>
+
+        <h5>Example:</h5>
+
+<pre><code>// property declaration
+  public      $name;
+  public      $title;
+  protected   $likesKoolAid;
+  private     $koolAidFlavors;
+
+  // Assignment
+  $name         = &quot;Miles Matheson&quot;;
+  $title        = &quot;Commander General of the Monroe Militia&quot;;
+  $likesKoolAid = true;
+
+  // Array member population
+  $koolAidFlavors = array(
+  &#39;best&#39;    =&gt; &#39;grape&#39;,
+  &#39;great&#39;   =&gt; &#39;cherry&#39;,
+  &#39;just-ok&#39; =&gt; &#39;fruit punch&#39;
+  );
+</code></pre>
+
+        <h4>Conditions</h4>
+
+        <h5>Yoda Conditions</h5>
+
+        <p>When testing conditions always take care to not accidentally perform an assignment operation and Yoda conditions are a
+          common techinique used to combat this -- these are not the PHP standard but are not discouraged. Yoda conditions are
+          achieved by reversing your conditional statement e.g.
+          if the condition is:  </p>
+
+<pre><code>&quot;($y == &#39;15&#39;)&quot;
+</code></pre>
+
+        <p>the Yoda condition would be written:  </p>
+
+<pre><code>&quot;(&#39;15&#39; == $y)&quot;
+</code></pre>
+
+        <h5>Unnecessary Comparisons</h5>
+
+        <p>When a function exists to handle a certain comparison, it should be used, as opposed to manually doing the
+          comparison. An example would be comparing to null e.g. (is_null($z)) as opposed to ($z == null).  </p>
+
+        <h4>Magic Numbers</h4>
+
+        <p>Do not use magic numbers. A magic number is a numeric constant embedded in code, without a constant definition. Any number except 0, 1 and 2 is considered magic.</p>
+
+<pre><code>if ($p-&gt;getX() &lt; 10) /* BAD */
+</code></pre>
+
+        <p>Use static final instead.</p>
+
+<pre><code>const WINDOW_XMAX = 10;
+  // ...
+  if ($p-&gt;getX() &lt; self::WINDOW_XMAX) /* GOOD */
+</code></pre>
+
+        <p>Even the most reasonable cosmic constant is going to change one day. You think there are 365 days per year? Your customers on Mars are going to be pretty unhappy about your silly prejudice. Make a constant</p>
+
+<pre><code>const DAYS_PER_YEAR = 365;
+</code></pre>
+
+        <p>so that you can easily produce a Martian version without trying to find all the 365&#39;s, 364&#39;s, 366&#39;s, 367&#39;s, and so on, in your code. </p>
+
+        <p><em>(borrowed from Java Coding Standards)</em></p>
+
+        <h4>Ternary Operator</h4>
+
+        <p>Golden rule of Ternary Operator - &quot;<em>Use wisely; Use with caution</em>&quot;  </p>
+
+        <p>A ternary operator should be use sparingly and only when truly needed. &quot;<em>Code like you cannot use it. If you find yourself
+          complaining about not being able to use it then it is probably ok to use it there.</em>&quot; </p>
+
+        <h3>Example:</h3>
+
+<pre><code>&lt;?PHP
+
+  namespace FAMC;
+
+  use FAMC\Example\Lib\BaseClass;
+  use FAMC\Example\Lib\LoanService;
+
+  /**
+  *  Franklin American Coder class
+  *
+  *  Used to write code. Some require coffee.
+  *  Cupcake ipsum dolor. Sit amet cheesecake powder carrot cake marshmallow liquorice.
+  *  Gingerbread gummi bears tart. Lemon drops topping macaroon caramels biscuit cupcake
+  *  jelly beans icing pudding. Marzipan lollipop cheesecake brownie tart tiramisu lollipop.
+  *
+  *  Apple pie toffee chocolate caramels gummies cupcake pie. Wypas icing chocolate cake sugar
+  *  plum cake chupa chups. Chocolate cake chocolate jelly oat cake cotton candy lemon drops
+  *  dessert chocolate cake. Cookie wafer gingerbread dessert sweet roll marzipan cookie liquorice.
+  *  Gummies gummi bears muffin donut tootsie roll gingerbread dessert powder brownie. Cotton candy
+  *  powder cotton candy gingerbread topping. Wypas lollipop tiramisu sugar plum.
+  *
+  *  @package   FAMC\Example
+  *  @author    Micah Breedlove &lt;mbreedlove@franklinamerican.com&gt;
+  *  @copyright 2012 Franklin American Mortgage Company
+  *
+  */
+  class Coder extends BaseClass
+  {
+  /**
+  * NEEDS_SUGAR Coder Needs Sugar
+  * @var string CONSTANT
+  */
+  const       NEEDS_SUGAR = true;
+
+  /**
+  * $coffee  Array used for coding
+  *
+  * @var    array
+  * @access public
+  */
+  public      $coffee;
+
+  /**
+  * $project  Current working project
+  *
+  * @var string
+  * @access public
+  */
+  public      $project;
+
+  /**
+  * $name  Current working project
+  *
+  * @var    string
+  * @access protected
+  */
+  protected   $name;
+
+  /**
+  * $title   Job Title
+  *
+  * @var     string
+  * @access  protected
+  */
+  protected   $title;
+
+  /**
+  * $likesCoffee If Coder likes Coffee
+  *
+  * @var     bool
+  * @access  private
+  */
+  private     $likesCoffee;
+
+  /**
+  * Getter for Coffee it checks for the sugar need and adds
+  * if necessary.
+  *
+  * @return array coffee array coder uses to write code
+  */
+  public function getCoffee()
+  {
+
+  if ($this-&gt;likesCoffee &amp;&amp; self::NEEDS_SUGAR) {
+  $this-&gt;addSugar();
+  }
+
+  return $this-&gt;coffee;
+  }
+
+  /**
+  * Adds Sugar to Coffee
+  *
+  * @param int     $amount       Amount of sugar desired. Default is 1
+  * @param string  $measurement  Measurement used to add sugar. Default is tspn
+  *
+  * @return \FAMC\Example\Coder
+  */
+  protected function addSugar($amount = 1, $measurement = &#39;tspn&#39;)
+  {
+  $this-&gt;coffee[&#39;sugar&#39;] = array($amount, $measurement);
+
+  return $this;
+  }
+
+  }
+</code></pre>
+
+        <p></p>
+
       </section>
+
+      <footer>
+        <p><small>&copy; 2015 Franklin American Mortgage</small></p>
+      </footer>
     </div>
 </body>
 </html>
